@@ -18,6 +18,7 @@ public class Servidor {
 		ResourceConfig config = new ResourceConfig().packages("br.com.alura.loja");
 		URI uri = URI.create("http://localhost:3000/");
 		HttpServer server = GrizzlyHttpServerFactory.createHttpServer(uri, config);
+		System.out.println("rodando");
 		return server;
 	}
 

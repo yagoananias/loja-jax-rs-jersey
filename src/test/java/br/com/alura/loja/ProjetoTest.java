@@ -1,5 +1,7 @@
 package br.com.alura.loja;
 
+import java.io.IOException;
+
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
@@ -10,11 +12,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.thoughtworks.xstream.XStream;
-
-import br.com.alura.loja.modelo.Carrinho;
+import br.com.alura.loja.modelo.Projeto;
 import junit.framework.Assert;
 
-public class ClienteTest {
+public class ProjetoTest {
 	
 	private HttpServer server;
 
@@ -29,14 +30,13 @@ public class ClienteTest {
 	}
 	
 	@Test
-	public void testaBuscarCarrinhoEsperado() {		
+	public void testaBuscarProjetoEsperado() throws IOException {		
 		
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target("http://localhost:3000");
-		String conteudo = target.path("/carrinhos/1").request().get(String.class);
-		Carrinho carrinho = (Carrinho) new XStream().fromXML(conteudo);
-		Assert.assertEquals("Rua Vergueiro 3185, 8 andar", carrinho.getRua());
-		
+		String conteudo = target.path("/projetos").request().get(String.class);
+		Projeto projeto = (Projeto) new XStream().fromXML(conteudo);
+		Assert.assertEquals("1", projeto.getId());
 		
 	}
 
